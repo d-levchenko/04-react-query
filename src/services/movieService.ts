@@ -23,13 +23,21 @@ const mapThroughFilms = (films: Movie) => {
   };
 };
 
-const fetchMovies = async (query: string): Promise<Movie[]> => {
-  const response = await axios.get<TmdbResponse>(`${BASE_URL}/search/movie`, {
-    params: { query },
+const fetchMovies = async (
+  query: string,
+  page: number,
+): Promise<TmdbResponse> => {
+  const { data } = await axios.get<TmdbResponse>(`${BASE_URL}/search/movie`, {
+    params: { query: query, page: page },
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  return response.data.results.map(mapThroughFilms);
+  return {
+    total_pages: data.total_pages,
+    total_results: data.total_results,
+    results: data.results.map(mapThroughFilms),
+    page: data.page,
+  };
 };
 
 export default fetchMovies;

@@ -10,7 +10,7 @@ const MovieGrid = ({ movies, onSelect }: MovieGridProps) => {
   return (
     <ul className={css.grid}>
       {movies.map(elem => (
-        <li onClick={() => onSelect(elem)}>
+        <li key={elem.id} onClick={() => onSelect(elem)}>
           <div className={css.card}>
             <img
               className={css.image}
