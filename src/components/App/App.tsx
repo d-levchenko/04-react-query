@@ -25,7 +25,7 @@ const ReactPaginate = (
 ).default;
 
 export default function App() {
-  const [selectedMovies, setSelectedMovies] = useState<Movie | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState<number>(1);
 
@@ -45,15 +45,15 @@ export default function App() {
   const handleSearch = async (query: string) => {
     setSearch(query);
     setPage(1);
-    setSelectedMovies(null);
+    setSelectedMovie(null);
   };
 
   const handleMovieSelect = (movie: Movie) => {
-    setSelectedMovies(movie);
+    setSelectedMovie(movie);
   };
 
   const handleModalClose = () => {
-    setSelectedMovies(null);
+    setSelectedMovie(null);
   };
 
   const handlePageChange = (event: { selected: number }) => {
@@ -82,8 +82,8 @@ export default function App() {
         <MovieGrid movies={data.results} onSelect={handleMovieSelect} />
       )}
 
-      {selectedMovies && (
-        <MovieModal movie={selectedMovies} onClose={handleModalClose} />
+      {selectedMovie && (
+        <MovieModal movie={selectedMovie} onClose={handleModalClose} />
       )}
     </>
   );
